@@ -2,6 +2,7 @@ import { GenericRepository } from "../shared/generic.repository";
 import { v4 as uuid } from "uuid";
 import Course from "./course.entity";
 import { CustomError } from "../shared/errors/customError";
+import courseRepository from "./course.repository";
 
 export class CourseService {
 
@@ -40,3 +41,6 @@ export class CourseService {
     return this.courseRepo.delete(id);
   }
 }
+
+
+export const courseService=new CourseService(courseRepository)

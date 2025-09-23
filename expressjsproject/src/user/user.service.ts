@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs"
 import { v4 as uuid } from "uuid";
 
 import { removeFields } from "../utils/object.util";
+import userRepository from "./user.repository";
 export class UsersService {
     
     constructor(private userRepo: GenericRepository<User>) { }
@@ -42,5 +43,4 @@ export class UsersService {
 
 }
 
-
-
+export const usersService = new UsersService(userRepository)

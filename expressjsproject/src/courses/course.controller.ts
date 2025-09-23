@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { CourseService } from "./courser.service";
+import { courseService, CourseService } from "./courser.service";
 import { AuthRequest } from "../shared/middleware/auth.middleware";
 import { CustomError } from "../shared/errors/customError";
 import { createCourseSchema, updateCourseSchema } from "./course.dto";
-import { success } from "zod";
 
 export class CourseController {
 
@@ -49,3 +48,5 @@ export class CourseController {
     res.json({ success: result });
   };
 }
+
+export const courseController=new CourseController(courseService);

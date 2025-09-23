@@ -1,22 +1,17 @@
 import { Router } from "express";
+import { UserRoles } from "./user.intity";
+import { usersController } from "./users.controller";
+import { authenticate, authorize } from "../shared/middleware/auth.middleware";
 
-import {  UserRoles } from "./user.intity";
-import { UsersService } from "./user.service";
-import { UsersController } from "./users.controller";
 
-  
 
-export default function userRoutes(userService: UsersService,createAuthMiddlewares:any ) {
 
-const {authenticate,authorize}=createAuthMiddlewares;
 
-  const router = Router();
-  const usersController = new UsersController(userService);
+export const userRoutes = Router();
 
-router.get("/me", authenticate, (req,res,)=>{usersController.getCurrentUser(req,res)});
-router.put("/me", authenticate, (req,res,)=>{usersController.updateCurrentUser(req,res)});
+userRoutes.get("/me", authenticate, (req, res,) => { usersController.getCurrentUser(req, res) });
+userRoutes.put("/me", authenticate, (req, res,) => { usersController.updateCurrentUser(req, res) });
 
-router.post("/CreateCoach", authenticate, authorize(UserRoles.ADMIN), (req,res,)=>{usersController.createCoach(req,res)});
+userRoutes.post("/CreateCoach", authenticate, authorize(UserRoles.ADMIN), (req, res,) => { usersController.createCoach(req, res) });
 
-  return router;
-}
+

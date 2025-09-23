@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import { GenericRepository } from "../shared/generic.repository";
 import {User, UserRoles } from "../user/user.intity";
 import { CustomError } from "../shared/errors/customError";
+import userRepository from "../user/user.repository";
 const SECRET =  String(process.env.JWT_SECRET);
 
 
@@ -41,3 +42,4 @@ export class AuthService {
 
     }
 }
+export const authService =new AuthService(userRepository)

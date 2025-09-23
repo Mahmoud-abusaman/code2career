@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { email, success, z } from 'zod';
 import { UserRoles } from './user.intity';
-import { UsersService } from './user.service';
+import { UsersService, usersService } from './user.service';
 import { AuthRequest } from '../shared/middleware/auth.middleware';
 import { removeFields } from '../utils/object.util';
 
@@ -48,3 +48,4 @@ export class UsersController {
         res.json({success:true,data:{user}});
     }
 }
+export const usersController=new UsersController(usersService);

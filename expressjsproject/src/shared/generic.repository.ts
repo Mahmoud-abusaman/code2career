@@ -34,8 +34,8 @@ export  class GenericRepository<T extends { id: string  }> implements IRepositor
   }
 
   async find(filter: Partial<T>): Promise<T[]> {
-    return this.items.filter(item =>
-      Object.entries(filter).every(([key, value]) => (item as any)[key] === value)
+    return this.items.filter((item:T) =>
+      Object.entries(filter).every(([key, value]) => (item as any )[key] === value)
     );
   }
 }

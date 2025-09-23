@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import {  z } from 'zod';
-import { UserRoles } from '../user/user.intity';
-import { AuthService } from './auth.service';
+import { authService, AuthService } from './auth.service';
 import { removeFields } from '../utils/object.util';
 
 
@@ -40,3 +39,5 @@ export class AuthController {
         return res.status(200).json({ success:true, data:{token} });
     }
 }
+
+export const authController=new AuthController(authService);

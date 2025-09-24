@@ -1,4 +1,3 @@
-import { array } from 'zod';
 import { USerPayloudI } from '../shared/userPayload';
 // import { UnifiedApiErrorResponse } from '../middlewares/response.middleware';
 
@@ -6,7 +5,7 @@ import { USerPayloudI } from '../shared/userPayload';
 
 export type MyEnvs = {
   PORT: string;
-  NODE_ENV: 'development' | 'production';
+  NODE_ENV: 'development' | 'production' | 'test' ;
   SESSION_SECRET: string;
   JWT_SECRET: string;
 };
@@ -16,8 +15,8 @@ declare global {
     interface ProcessEnv extends MyEnvs {}
   }
   namespace Express {
-    interface Request{
-        user:USerPayloudI
+    interface Request {
+      user: USerPayloudI;
     }
     // interface Response {
     //   create: (data: object) => this;

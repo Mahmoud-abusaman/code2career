@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { courseService, CourseService } from "./courser.service";
-import { AuthRequest } from "../shared/middleware/auth.middleware";
 import { CustomError } from "../shared/errors/customError";
 import { createCourseSchema, updateCourseSchema } from "./course.dto";
 
@@ -18,7 +17,7 @@ export class CourseController {
     res.json({success:true, data:{course}});
   };
 
-  create = async (req: AuthRequest, res: Response) => {
+  create = async (req: Request, res: Response) => {
     const parsed = createCourseSchema.safeParse(req.body);
     if (!parsed.success) throw new CustomError(parsed.error.issues[0].message, 400);
 
@@ -31,7 +30,7 @@ export class CourseController {
     res.status(201).json({success:true, data:{course:newCourse}});
   };
 
-  update =async  (req: AuthRequest, res: Response) => {
+  update =async  (req: Request, res: Response) => {
     const course = this.service.getById(req.params.id);
     if (!course) throw new CustomError("Course not found", 404);
 
@@ -41,7 +40,7 @@ export class CourseController {
     res.json({success:true,data:{course:updated}});
   };
 
-  delete = async (req: AuthRequest, res: Response) => {
+  delete = async (req: Request, res: Response) => {
 
 
     const result = await this.service.delete(req.params.id, req.user.id);

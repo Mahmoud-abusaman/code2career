@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { email, success, z } from 'zod';
 import { UserRoles } from './user.intity';
 import { UsersService, usersService } from './user.service';
-import { AuthRequest } from '../shared/middleware/auth.middleware';
 import { removeFields } from '../utils/object.util';
 
 
@@ -20,14 +19,14 @@ export class UsersController {
 
 
 
-    async getCurrentUser(req: AuthRequest, res: Response) {
+    async getCurrentUser(req: Request, res: Response) {
         
         const user = await this.userService.getCurrentUser(req.user?.id);
         if (!user) return res.status(404).json({ message: "User not found" });
         res.json({success:true, data:{user}});
     }
 
-    async updateCurrentUser(req: AuthRequest, res: Response) {
+    async updateCurrentUser(req: Request, res: Response) {
         const parseResult = updateUserDto.safeParse(req.body);
         if (!parseResult.success) {
             return res.status(400).json({ errors: parseResult.error.issues });
@@ -38,7 +37,7 @@ export class UsersController {
         res.json({success:true, data:{user}});
     }
 
-    async createCoach(req: AuthRequest, res: Response){
+    async createCoach(req: Request, res: Response){
         const parseResult=createCoachDto.safeParse(req.body);
         if (!parseResult.success) {
             return res.status(400).json({ errors: parseResult.error.issues });
